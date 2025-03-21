@@ -92,6 +92,26 @@
 
 
 
+    function addSetTimeButton(iframeDocument) {
+        if (iframeDocument.getElementById("set-time-button")) return; // 防止重複添加
+
+        let button = iframeDocument.createElement("button");
+        button.id = "set-time-button";
+        button.innerText = "填入時段n";
+        button.style.position = "fixed";
+        button.style.top = "50px";
+        button.style.right = "10px";
+        button.style.zIndex = "9999";
+        button.style.padding = "10px";
+        button.style.backgroundColor = "#28a745";
+        button.style.color = "white";
+        button.style.border = "none";
+        button.style.borderRadius = "5px";
+        button.style.cursor = "pointer";
+
+        button.addEventListener("click", () => {nextWeekday(iframeDocument,0);});
+        iframeDocument.body.appendChild(button);
+    }
 
 
     function addNextWeekdayBtn(iframeDocument) {
@@ -114,6 +134,8 @@
         button.addEventListener("click", () => {nextWeekday(iframeDocument,0);});
         iframeDocument.body.appendChild(button);
     }
+
+
     function handleIframe() {
         console.log("running handle...")
         let iframe = document.querySelector('frame[name="main"]'); // 找到 name="main" 的 iframe
@@ -128,7 +150,7 @@
             if (iframe.contentDocument) {
                 addWorkinButton(iframe.contentDocument);
                 addSetTimeButton(iframe.contentDocument);
-                addNextWeekdayBtn(iframe.contentDocument);
+                //addNextWeekdayBtn(iframe.contentDocument);
             }
         } else {
             console.warn("未找到 iframe[name='main']");
